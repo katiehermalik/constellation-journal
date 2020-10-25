@@ -2,6 +2,7 @@
 
 The lab for this lesson is repeating everything we just did, except you'll collect something else like Finches and call the project something like finchcollector, or whatever.
 
+- Fork and clone this repo
 - Pick a reource. (Dogs, Cards, Stamps, etc)
 - Initialize your project. (Do not forget your .env)
 - Create your db. 
