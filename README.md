@@ -7,7 +7,7 @@ The lab for this lesson is repeating everything we just did, except you'll colle
 - Initialize your project. (Do not forget your .env)
 - Create your db. 
 - Configure your application to connect to the db.
-(Dont forget to use starapp to get your application folder and include it in your settings.py)
+(Dont forget to use startapp to get your application folder and include it in your settings.py)
 - Create a home route, about route, and index route. 
 - Create a template view that extends a base for all the routes. 
 
