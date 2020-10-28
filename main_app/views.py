@@ -8,5 +8,12 @@ def about(request):
     return render(request, 'about.html')
 
 def constellations_index(request):
-    return render(request, 'constellations/index.html')
+    constellations = Constellation.objects.all()
+    return render(request, 'constellations/index.html', {'constellations': constellations })
 
+def constellations_detail(request, constellation_id):
+    # DB query
+    constellation = Constellation.objects.get(id=constellation_id)
+    return render(request, 'constellations/detail.html', {
+        'constellation': constellation,
+    })
