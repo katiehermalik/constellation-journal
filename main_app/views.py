@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Constellation
+from .models import Constellation, Planet
 from .forms import StarForm
 
 def home(request):
@@ -13,12 +13,13 @@ def constellations_index(request):
     return render(request, 'constellations/index.html', {'constellations': constellations })
 
 def constellations_detail(request, constellation_id):
-    # DB query
     constellation = Constellation.objects.get(id=constellation_id)
+    planets_constellation_doesnt_have = Planet.objects.exclude(id__in = constellation.planets.all().values_list('id'))
     star_form = StarForm()
     return render(request, 'constellations/detail.html', {
         'constellation': constellation,
-        'star_form': star_form
+        'star_form': star_form,
+        'planets': planets_constellation_doesnt_have
     })
 
 def add_star(request, constellation_id):
