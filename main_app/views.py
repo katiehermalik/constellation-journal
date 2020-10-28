@@ -14,6 +14,8 @@ def constellations_index(request):
 def constellations_detail(request, constellation_id):
     # DB query
     constellation = Constellation.objects.get(id=constellation_id)
+    star_form = StarForm()
     return render(request, 'constellations/detail.html', {
         'constellation': constellation,
+        'star_form': star_form
     })
