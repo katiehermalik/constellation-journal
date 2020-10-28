@@ -29,3 +29,9 @@ def add_star(request, constellation_id):
     new_star.constellation_id = constellation_id
     new_star.save()
   return redirect('detail', constellation_id=constellation_id)
+
+def assoc_planet(request, constellation_id, planet_id):
+    constellation = Constellation.objects.get(id=constellation_id)
+    planet = Planet.objects.get(id=planet_id)
+    constellation.planets.add(planet)
+    return redirect('detail', constellation_id)

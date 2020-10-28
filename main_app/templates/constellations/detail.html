@@ -63,7 +63,7 @@
             <span class="card-title">{{ planet.name }}</span>
           </div>
           <div class="card-action">
-            <form action="" method="post">
+            <form action="{% url 'assoc_planet' constellation.id planet.id %}" method="post">
               {% csrf_token %}
               <button type="submit" class="btn">Add</button>
             </form>
