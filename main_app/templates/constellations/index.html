@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Constellation List</h1>
+
+{% for constellation in constellations %}
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">{{ constellation.name }}</span>
+      <p>Symbolism: {{ constellation.symbolism }}</p>
+      <p>Number of Main Stars: {{ constellation.num_main_stars }}</p>
+      <p>Brightest Star: {{ constellation.brightest_star }}</p>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}

@@ -3,12 +3,20 @@ body {
   min-height: 100vh;
   flex-direction: column;
 }
+.nav-wrapper {
+  background-color: #ffa726 !important;
+}
 
 main {
   flex: 1 0 auto;
 }
 
+.card {
+  background-color: #e8eaf6;
+}
+
 footer {
   padding-top: 0;
   text-align: right;
+  background-color: #ffa726 !important;
 }
