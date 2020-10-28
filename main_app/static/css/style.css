@@ -3,8 +3,11 @@ body {
   min-height: 100vh;
   flex-direction: column;
 }
+
 .nav-wrapper {
   background-color: #ffa726 !important;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 main {
@@ -19,4 +22,9 @@ footer {
   padding-top: 0;
   text-align: right;
   background-color: #ffa726 !important;
+}
+
+footer .right {
+  padding-bottom: 15px;
+  padding-right: 10px;
 }
