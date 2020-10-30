@@ -41,6 +41,24 @@ def add_constellation(request):
         return render(request, 'constellations/new.html', context)
 
 
+def edit_constellation(request, constellation_id):
+    constellation = Constellation.objects.get(id=constellation_id)
+    if request.method == 'POST':
+        constellation_form = ConstellationForm(request.POST, instance=constellation)
+        if constellation_form.is_valid():
+            updated_constellation = constellation_form.save()
+            return redirect('detail', updated_constellation.id)
+    else: 
+        form = ConstellationForm(instance=constellation)
+        context = {'form': form}
+        return render(request, 'constellations/edit.html', context)
+
+
+def delete_constellation(request, constellation_id):
+    Constellation.objects.get(id=constellation_id).delete()
+    return redirect('constellations_index')
+
+
 # --------------------------------------- CONSTELLATION STARS
 def add_star(request, constellation_id):
     form = StarForm(request.POST)
@@ -49,11 +67,6 @@ def add_star(request, constellation_id):
         new_star.constellation_id = constellation_id
         new_star.save()
     return redirect('detail', constellation_id=constellation_id)
-
-
-def delete_constellation(request, constellation_id):
-    Constellation.objects.get(id=constellation_id).delete()
-    return redirect('constellations_index')
 
 
 # --------------------------------------- CONSTELLATION PLANETS

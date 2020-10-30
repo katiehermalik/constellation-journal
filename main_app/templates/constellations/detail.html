@@ -14,7 +14,7 @@
         <p>Brightest Star: {{ constellation.brightest_star }}</p>
       </div>
       <div class="card-action">
-        <a type="submit" class="btn-small">Edit</a>
+        <a href="{% url 'edit_constellation' constellation.id %}" type="submit" class="btn-small">Edit</a>
         <a href="{% url 'delete_constellation' constellation.id %}" type="submit" class="btn-small red">Delete</a>
       </div>
     </div>

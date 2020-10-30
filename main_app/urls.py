@@ -9,6 +9,7 @@ urlpatterns = [
     path('constellations/new/', views.add_constellation, name='add_constellation'),
     path('constellations/<int:constellation_id>/delete/', views.delete_constellation, name='delete_constellation'),
     path('constellations/<int:constellation_id>/', views.constellations_detail, name='detail'),
+    path('constellations/<int:constellation_id>/edit/', views.edit_constellation, name='edit_constellation'),
     path('constellations/<int:constellation_id>/add_star/', views.add_star, name='add_star'),
     path('constellations/<int:constellation_id>/assoc_planet/<int:planet_id>/', views.assoc_planet, name='assoc_planet'),
     path('constellations/<int:constellation_id>/dissociate_planet/<int:planet_id>/', views.dissociate_planet, name='dissociate_planet'),
