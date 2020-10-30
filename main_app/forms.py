@@ -9,4 +9,4 @@ class StarForm(forms.ModelForm):
 class ConstellationForm(forms.ModelForm):
   class Meta:
     model = Constellation
-    fields = ('name', 'symbolism', 'num_main_stars', 'brightest_star' )
+    fields = ('name', 'symbolism', 'num_main_stars', 'brightest_star', 'date_observed')

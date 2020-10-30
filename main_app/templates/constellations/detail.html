@@ -5,12 +5,22 @@
 <h1>Constellation Details</h1>
 
 <div class="row">
-  <div class="col s6">
+  <div class="col s8">
     <div class="card">
       <div class="card-content">
-        <span class="card-title">{{ constellation.name }}</span>
+        <table>
+          <thead>
+            <tr>
+              <th>{{ constellation.name }}</th>
+              <th class="right-align">Date Observed: {{ constellation.date_observed }}</th>
+            </tr>
+          </thead>
+        </table>
+        <br>
         <p>Symbolism: {{ constellation.symbolism }}</p>
+        <br>
         <p>Number of Main Stars: {{ constellation.num_main_stars }}</p>
+        <br>
         <p>Brightest Star: {{ constellation.brightest_star }}</p>
       </div>
       <div class="card-action">
@@ -19,14 +29,15 @@
       </div>
     </div>
   </div>
-  <div class="col s6">
+  <div class="col s4">
+    <h4>Stars</h4>
     <form action="{% url 'add_star' constellation.id %}" method="POST">
       {% csrf_token %}
       {{ star_form.as_p }}
       <input type="submit" class="btn" value="Add Star">
     </form>
     <table class="striped">
-      <thead>
+      <thead>    
         <tr><th>Name</th><th>Apparent Magnitude</th></tr>
       </thead>
       <tbody>
@@ -34,7 +45,6 @@
           <tr>
             <td>{{star.name}}</td>
             <td>{{star.apparent_magnitude}}</td>
-            <td>{{star.date_observed}}</td>
           </tr>
         {% endfor %}
       </tbody>
@@ -83,14 +93,4 @@
     {% endif %}
   </div>
 </div>
-
-<script>
-  const dateEl = document.getElementById('id_date_observed');
-  M.Datepicker.init(dateEl, {
-    format: 'yyyy-mm-dd',
-    defaultDate: new Date(),
-    setDefaultDate: true,
-    autoClose: true
-  });
-</script>
 {% endblock %}

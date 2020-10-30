@@ -8,5 +8,13 @@
     {{ form.as_p }}
     <button class="btn-small" type="submit">Add Constellation</button>
   </form>
-
+<script>
+  const dateEl = document.getElementById('id_date_observed');
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+</script>
 {% endblock %}
