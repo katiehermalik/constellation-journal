@@ -19,11 +19,12 @@
     <nav>
       <div class="nav-wrapper">
         <ul>
-          <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Constellation Collector</a></li>
+          <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Constellation Collector</a></li>
         </ul>
         <ul class="right">
-          <li><a href="/about">About</a></li>
-          <li><a href="/constellations">My Constellations</a></li>
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'add_constellation' %}">Add Constellation</a></li>
+          <li><a href="{% url 'constellations_index' %}">My Constellations</a></li>
         </ul>
       </div>
     </nav>
