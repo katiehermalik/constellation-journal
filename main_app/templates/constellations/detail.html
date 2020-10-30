@@ -13,7 +13,10 @@
         <p>Number of Main Stars: {{ constellation.num_main_stars }}</p>
         <p>Brightest Star: {{ constellation.brightest_star }}</p>
       </div>
-      
+      <div class="card-action">
+        <a type="submit" class="btn-small">Edit</a>
+        <a href="{% url 'delete_constellation' constellation.id %}" type="submit" class="btn-small red">Delete</a>
+      </div>
     </div>
   </div>
   <div class="col s6">

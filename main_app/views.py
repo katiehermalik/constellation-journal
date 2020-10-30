@@ -43,12 +43,17 @@ def add_constellation(request):
 
 # --------------------------------------- CONSTELLATION STARS
 def add_star(request, constellation_id):
-  form = StarForm(request.POST)
-  if form.is_valid():
-    new_star = form.save(commit=False)
-    new_star.constellation_id = constellation_id
-    new_star.save()
-  return redirect('detail', constellation_id=constellation_id)
+    form = StarForm(request.POST)
+    if form.is_valid():
+        new_star = form.save(commit=False)
+        new_star.constellation_id = constellation_id
+        new_star.save()
+    return redirect('detail', constellation_id=constellation_id)
+
+
+def delete_constellation(request, constellation_id):
+    Constellation.objects.get(id=constellation_id).delete()
+    return redirect('constellations_index')
 
 
 # --------------------------------------- CONSTELLATION PLANETS
