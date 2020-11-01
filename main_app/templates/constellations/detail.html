@@ -71,7 +71,6 @@
           <div class="card-content">
             <span class="card-title">{{ planet.name }}</span>
           </div>
-          {% if constellation.user.id == user.id %}
           <div class="card-action">
             <form action="{% url 'dissociate_planet' constellation.id planet.id %}"
               method="post">
@@ -79,7 +78,6 @@
               <button type="submit" class="btn">Remove</button>
             </form>
           </div>
-          {% endif %}
         </div>
       {% endfor %} 
     {% else %}
@@ -97,7 +95,6 @@
           <div class="card-content">
             <span class="card-title">{{ planet.name }}</span>
           </div>
-          {% if constellation.user.id == user.id %}
             <div class="card-action">
               <form action="{% url 'assoc_planet' constellation.id planet.id %}"
                 method="post">
@@ -105,7 +102,6 @@
                 <button type="submit" class="btn">Add</button>
               </form>
             </div>
-          {% endif %}
         </div>
         {% endfor %} 
     </div>
