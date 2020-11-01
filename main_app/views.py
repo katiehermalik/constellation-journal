@@ -4,6 +4,7 @@ from .models import Constellation, Planet
 from .forms import StarForm, ConstellationForm
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 
 # --------------------------------------- STATIC PAGES
@@ -16,11 +17,13 @@ def about(request):
 
 
 # --------------------------------------- CONSTELLATIONS
+@login_required
 def constellations_index(request):
     constellations = Constellation.objects.filter(user=request.user)
     return render(request, 'constellations/index.html', {'constellations': constellations })
 
 
+@login_required
 def constellations_detail(request, constellation_id):
     constellation = Constellation.objects.get(id=constellation_id)
     planets_constellation_doesnt_have = Planet.objects.exclude(id__in = constellation.planets.all().values_list('id'))
@@ -31,6 +34,8 @@ def constellations_detail(request, constellation_id):
         'planets': planets_constellation_doesnt_have
     })
 
+
+@login_required
 def add_constellation(request):
     if request.method == 'POST':
         constellation_form = ConstellationForm(request.POST)
@@ -45,6 +50,7 @@ def add_constellation(request):
         return render(request, 'constellations/new.html', context)
 
 
+@login_required
 def edit_constellation(request, constellation_id):
     constellation = Constellation.objects.get(id=constellation_id)
     if request.method == 'POST':
@@ -58,12 +64,14 @@ def edit_constellation(request, constellation_id):
         return render(request, 'constellations/edit.html', context)
 
 
+@login_required
 def delete_constellation(request, constellation_id):
     Constellation.objects.get(id=constellation_id).delete()
     return redirect('constellations_index')
 
 
 # --------------------------------------- CONSTELLATION STARS
+@login_required
 def add_star(request, constellation_id):
     form = StarForm(request.POST)
     if form.is_valid():
@@ -74,12 +82,14 @@ def add_star(request, constellation_id):
 
 
 # --------------------------------------- CONSTELLATION PLANETS
+@login_required
 def assoc_planet(request, constellation_id, planet_id):
     planet = Planet.objects.get(id=planet_id)
     Constellation.objects.get(id=constellation_id).planets.add(planet)
     return redirect('detail', constellation_id)
 
 
+@login_required
 def dissociate_planet(request, constellation_id, planet_id):
     planet = Planet.objects.get(id=planet_id)
     Constellation.objects.get(id=constellation_id).planets.remove(planet)
