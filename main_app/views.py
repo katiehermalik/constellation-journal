@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Constellation, Planet
 from .forms import StarForm, ConstellationForm
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
 
 
 # --------------------------------------- STATIC PAGES
@@ -15,7 +17,7 @@ def about(request):
 
 # --------------------------------------- CONSTELLATIONS
 def constellations_index(request):
-    constellations = Constellation.objects.all()
+    constellations = Constellation.objects.filter(user=request.user)
     return render(request, 'constellations/index.html', {'constellations': constellations })
 
 
@@ -33,7 +35,9 @@ def add_constellation(request):
     if request.method == 'POST':
         constellation_form = ConstellationForm(request.POST)
         if constellation_form.is_valid():
-            new_constellation = constellation_form.save()
+            new_constellation = constellation_form.save(commit=False)
+            new_constellation.user = request.user
+            new_constellation.save()
             return redirect('detail', new_constellation.id)
     else: 
         form = ConstellationForm()
@@ -80,3 +84,19 @@ def dissociate_planet(request, constellation_id, planet_id):
     planet = Planet.objects.get(id=planet_id)
     Constellation.objects.get(id=constellation_id).planets.remove(planet)
     return redirect('detail', constellation_id)
+
+
+# --------------------------------------- AUTH
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('constellations_index')
+        else:
+            error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)
