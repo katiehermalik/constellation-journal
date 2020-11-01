@@ -64,7 +64,7 @@
 <hr />
 <div class="row">
   <div class="col s6">
-    <h5>Planets aligning with {{ constellation.name }}</h5>
+    <h6>Planets aligning with {{ constellation.name }} on {{ constellation.date_observed }}:</h6>
     {% if constellation.planets.count %} 
       {% for planet in constellation.planets.all %}
         <div class="card">
@@ -91,7 +91,7 @@
 
   {% if constellation.user.id == user.id %}
     <div class="col s6">
-      <h5>Planets</h5>
+      <h6>Planets:</h6>
       {% if planets.count %} 
         {% for planet in planets.all %}
         <div class="card">
