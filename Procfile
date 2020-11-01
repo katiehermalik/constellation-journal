@@ -1,0 +1,1 @@
+web: gunicorn constellationcollector_project.wsgi
