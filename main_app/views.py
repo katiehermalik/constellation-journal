@@ -28,11 +28,12 @@ def constellations_detail(request, constellation_id):
     constellation = Constellation.objects.get(id=constellation_id)
     planets_constellation_doesnt_have = Planet.objects.exclude(id__in = constellation.planets.all().values_list('id'))
     star_form = StarForm()
-    return render(request, 'constellations/detail.html', {
-        'constellation': constellation,
+    context = {
+        'constellation': constellation, 
         'star_form': star_form,
         'planets': planets_constellation_doesnt_have
-    })
+        }
+    return render(request, 'constellations/detail.html', context)
 
 
 @login_required
